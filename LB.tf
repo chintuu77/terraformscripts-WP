@@ -17,28 +17,16 @@ resource "aws_lb_target_group" "target_elb" {
     protocol = "HTTP"
   }
 }
-resource "aws_lb_target_group_attachment" "ecomm" {
+resource "aws_lb_target_group_attachment" "wordpress" {
   target_group_arn = aws_lb_target_group.target_elb.arn
-  target_id        = aws_instance.ecomm.id
+  target_id        = aws_instance.wordpress.id
   port             = 80
 
   depends_on = [
     aws_lb_target_group.target_elb,
-    aws_instance.ecomm,
+    aws_instance.wordpress,
   ]
 }
-
-resource "aws_lb_target_group_attachment" "food" {
-  target_group_arn = aws_lb_target_group.target_elb.arn
-  target_id        = aws_instance.food.id
-  port             = 80
-
-  depends_on = [
-    aws_lb_target_group.target_elb,
-    aws_instance.food,
-  ]
-}
-
 resource "aws_lb_listener" "listener_elb" {
   load_balancer_arn = aws_lb.external-alb.arn
   port              = 80
