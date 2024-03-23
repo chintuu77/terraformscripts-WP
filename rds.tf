@@ -12,10 +12,11 @@ resource "aws_db_instance" "rds-subnet" {
   db_subnet_group_name   = aws_db_subnet_group.rds-subnet.id
   engine                 = "mysql"
   engine_version         = "8.0.35"
-  instance_class         = "db.t2.micro"
+  instance_class         = "db.t3.micro"
   multi_az               = true
   username               = "admin2143"
   password               = "vivek2143"
   skip_final_snapshot    = true
   vpc_security_group_ids = [aws_security_group.db-sg.id]
 }
+
